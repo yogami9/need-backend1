@@ -1,0 +1,11 @@
+FROM postgres:16-alpine
+
+# Set environment variables
+ENV POSTGRES_DB=needapp_db
+ENV POSTGRES_USER=needapp_user
+
+# Health check
+HEALTHCHECK --interval=10s --timeout=5s --retries=5 \
+  CMD pg_isready -U $POSTGRES_USER -d $POSTGRES_DB || exit 1
+
+EXPOSE 5432
