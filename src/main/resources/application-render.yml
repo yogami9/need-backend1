@@ -3,9 +3,9 @@ spring:
     activate:
       on-profile: render
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://needapp-postgres:5432/needapp_db}
-    username: ${SPRING_DATASOURCE_USERNAME:needapp_user}
-    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://needapp_postgres_user:p9482yGeWsjPEdmyhakO5vv6iy0BnmM6@dpg-d3p81o8dl3ps739kp6dg-a/needapp_postgres}
+    username: ${SPRING_DATASOURCE_USERNAME:needapp_postgres_user}
+    password: ${SPRING_DATASOURCE_PASSWORD:p9482yGeWsjPEdmyhakO5vv6iy0BnmM6}
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 5
