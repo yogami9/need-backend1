@@ -49,12 +49,12 @@ services:
         value: render
       - key: PORT
         value: 10000
-      - key: SPRING_DATASOURCE_URL
-        value: jdbc:postgresql://needapp_postgres_user:p9482yGeWsjPEdmyhakO5vv6iy0BnmM6@dpg-d3p81o8dl3ps739kp6dg-a/needapp_postgres
-      - key: SPRING_DATASOURCE_USERNAME
-        value: needapp_postgres_user
-      - key: SPRING_DATASOURCE_PASSWORD
-        value: p9482yGeWsjPEdmyhakO5vv6iy0BnmM6
+      - key: DATABASE_URL
+        sync: false
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
 
       - key: SPRING_DATA_ELASTICSEARCH_URIS
         value: http://needapp-elasticsearch:9200

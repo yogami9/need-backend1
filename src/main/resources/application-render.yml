@@ -3,12 +3,14 @@ spring:
     activate:
       on-profile: render
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://needapp_postgres_user:p9482yGeWsjPEdmyhakO5vv6iy0BnmM6@dpg-d3p81o8dl3ps739kp6dg-a/needapp_postgres}
-    username: ${SPRING_DATASOURCE_USERNAME:needapp_postgres_user}
-    password: ${SPRING_DATASOURCE_PASSWORD:p9482yGeWsjPEdmyhakO5vv6iy0BnmM6}
+    url: ${SPRING_DATASOURCE_URL:${JDBC_DATABASE_URL:jdbc:${DATABASE_URL}}}
+    username: ${SPRING_DATASOURCE_USERNAME:${JDBC_DATABASE_USERNAME:${DB_USERNAME}}}
+    password: ${SPRING_DATASOURCE_PASSWORD:${JDBC_DATABASE_PASSWORD:${DB_PASSWORD}}}
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 5
+      data-source-properties:
+        sslmode: require
   jpa:
     hibernate:
       ddl-auto: update
