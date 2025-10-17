@@ -1,0 +1,47 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Maven
+target/
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+*.iws
+.vscode/
+.classpath
+.project
+.settings/
+
+# Logs
+*.log
+
+# Environment
+.env
+.envrc
+*.pem
+certs/
+
+# Test
+src/test/
+
+# Documentation
+*.md
+HELP.md
+LICENSE
+
+# CI/CD
+.github/
+deploy.sh
+
+# Python scripts
+*.py
+
+# Docker
+docker-compose.yml
+docker-compose.render.yml
+Dockerfile.postgres
+Dockerfile.elasticsearch

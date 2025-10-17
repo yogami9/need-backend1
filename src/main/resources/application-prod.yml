@@ -1,0 +1,37 @@
+spring:
+  config:
+    import: "aws-parameterstore:/needapp/"
+    activate:
+      on-profile: prod
+  datasource:
+    # Support both direct Docker environment variables and AWS Parameter Store
+    url: ${DB_URL:${SPRING_DATASOURCE_URL:jdbc:postgresql://needapp-postgres:5432/needapp_db}}
+    username: ${DB_USERNAME:${SPRING_DATASOURCE_USERNAME:needapp_user}}
+    password: ${DB_PASSWORD:${SPRING_DATASOURCE_PASSWORD}}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  data:
+    elasticsearch:
+      # Support both direct Docker environment variables and configured values
+      uris: ${ELASTICSEARCH_URI:${SPRING_DATA_ELASTICSEARCH_URIS:http://needapp-elasticsearch:9200}}
+      connection-timeout: 5s
+      socket-timeout: 10s
+
+app:
+  environment:
+    isProd: true
+
+logging:
+  level:
+    org.springframework.cloud.aws: DEBUG
+    com.zaxxer.hikari: DEBUG
+    org.hibernate: INFO
+    org.springframework: INFO

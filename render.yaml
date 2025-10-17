@@ -1,0 +1,65 @@
+services:
+  # PostgreSQL Database
+  - type: pserv
+    name: needapp-postgres
+    env: docker
+    region: frankfurt
+    plan: starter
+    dockerfilePath: ./Dockerfile.postgres
+    envVars:
+      - key: POSTGRES_DB
+        value: needapp_db
+      - key: POSTGRES_USER
+        value: needapp_user
+      - key: POSTGRES_PASSWORD
+        generateValue: true
+    disk:
+      name: postgres-data
+      mountPath: /var/lib/postgresql/data
+      sizeGB: 10
+
+  # Elasticsearch
+  - type: pserv
+    name: needapp-elasticsearch
+    env: docker
+    region: frankfurt
+    plan: starter
+    dockerfilePath: ./Dockerfile.elasticsearch
+    envVars:
+      - key: discovery.type
+        value: single-node
+      - key: xpack.security.enabled
+        value: false
+      - key: ES_JAVA_OPTS
+        value: -Xms512m -Xmx512m
+    disk:
+      name: elastic-data
+      mountPath: /usr/share/elasticsearch/data
+      sizeGB: 10
+
+  # Spring Boot Application
+  - type: web
+    name: needapp
+    env: docker
+    region: frankfurt
+    plan: starter
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:postgresql://needapp-postgres:5432/needapp_db
+      - key: SPRING_DATASOURCE_USERNAME
+        value: needapp_user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromService:
+          type: pserv
+          name: needapp-postgres
+          envVarKey: POSTGRES_PASSWORD
+      - key: SPRING_DATA_ELASTICSEARCH_URIS
+        value: http://needapp-elasticsearch:9200
+      - key: HF_USERNAME
+        sync: false
+      - key: HF_API_TOKEN
+        sync: false
+    healthCheckPath: /api/v1/actuator/health

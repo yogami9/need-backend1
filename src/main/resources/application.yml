@@ -1,0 +1,67 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: needapp
+  data:
+    elasticsearch:
+      uris: http://localhost:9200
+  datasource:
+    url: jdbc:postgresql://localhost:5432/needapp_db
+    username: needapp_user
+    password: cheruiyot8711
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+server:
+  servlet:
+    context-path: /api/v1
+
+app:
+  environment:
+    isProd: false
+  security:
+    rsaKeys:
+      publicKey: "classpath:certs/publicKey.pem"
+      privateKey: "classpath:certs/privateKey.pem"
+  ai:
+    huggingface:
+      username: ${HF_USERNAME:YOUR_HF_USERNAME}
+      api-token: ${HF_API_TOKEN:your-huggingface-api-token-here}
+      models:
+        category-recommendation: need-category-recommendation
+        chat-support: need-chat-support
+        service-description: need-service-description
+        semantic-search: need-semantic-search
+        content-moderation: need-content-moderation
+      api-url: https://api-inference.huggingface.co/models
+      timeout: 30
+      enabled: true
+    features:
+      category-recommendation: true
+      chat-support: true
+      content-moderation: true
+      service-description-generation: true
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+  api-docs:
+    path: /v3/api-docs
+
+logging:
+  level:
+    org.springframework.web.socket: DEBUG
+    org.springframework.messaging: DEBUG
+    org.springframework.data.elasticsearch.client.WIRE: DEBUG
+    org.springframework.data.elasticsearch: DEBUG
+    '[com.needbackend_app.needapp]': TRACE
+    '[org.springframework.security]': DEBUG
+    '[org.springframework.boot.autoconfigure.flyway]': DEBUG

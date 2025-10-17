@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/needapp_db
+    username: needapp_user
+    password: cheruiyot8711
+    driver-class-name: org.postgresql.Driver
+  data:
+    elasticsearch:
+      uris: http://localhost:9200
+  config:
+    activate:
+      on-profile: dev
+  cloud:
+    aws:
+      parameterstore:
+        enabled: false
+      region:
+        static: us-east-1
+      credentials:
+        access-key: dummy
+        secret-key: dummy
+
+app:
+  environment:
+    isProd: false
