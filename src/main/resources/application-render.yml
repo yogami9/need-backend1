@@ -1,0 +1,34 @@
+spring:
+  config:
+    activate:
+      on-profile: render
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  data:
+    elasticsearch:
+      uris: ${SPRING_DATA_ELASTICSEARCH_URIS}
+
+server:
+  port: ${PORT:10000}
+  servlet:
+    context-path: /api/v1
+
+app:
+  environment:
+    isProd: true
+
+logging:
+  level:
+    com.zaxxer.hikari: INFO
+    org.hibernate: INFO
+    org.springframework: INFO
+    com.needbackend_app.needapp: INFO
