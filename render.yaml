@@ -50,7 +50,7 @@ services:
       - key: PORT
         value: 10000
       - key: SPRING_DATASOURCE_URL
-        value: jdbc:postgresql://dpg-d3p81o8dl3ps739kp6dg-a:5432/needapp_postgres?sslmode=require
+        value: jdbc:postgresql://dpg-d3p81o8dl3ps739kp6dg-a.oregon-postgres.render.com:5432/needapp_postgres?sslmode=require
       - key: SPRING_DATASOURCE_USERNAME
         value: needapp_postgres_user
       - key: SPRING_DATASOURCE_PASSWORD

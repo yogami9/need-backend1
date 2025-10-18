@@ -35,4 +35,8 @@ HEALTHCHECK --interval=30s --timeout=3s CMD wget -q --spider http://localhost:${
 
 # Expose port
 EXPOSE ${PORT:-10000}
+
+# Set Spring profile to render for Render deployment
+ENV SPRING_PROFILES_ACTIVE=render
+
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]
