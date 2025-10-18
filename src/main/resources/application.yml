@@ -1,6 +1,10 @@
 spring:
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:dev}
+  cloud:
+    aws:
+      region:
+        static: us-east-1
   application:
     name: needapp
   data:
